@@ -19,6 +19,11 @@ DATABASES = {
     'default': dj_database_url.config(default='sqlite:///{0}'.format(DEFAULT_SQLITE_DB_PATH))
 }
 
+if 'mysql' in DATABASES['default']['ENGINE'] and config('MYSQL_SSL_CERT_FILE', default=None):
+    DATABASES['default'].setdefault('OPTIONS', default=dict())['ssl'] =  {
+        'key': '/map/to/ca-cert.pem'
+    }
+
 if 'postgres' in DATABASES['default']['ENGINE']:
     DATABASES['default']['OPTIONS'] = {
         'autocommit': True,

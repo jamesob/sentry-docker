@@ -17,6 +17,9 @@ SECRET_KEY=
 ## postgres DB
 #DATABASE_URL=postgres://postgres:@postgres/postgres
 
+## mysql DB
+#MYSQL_SSL_CERT_FILE=/tmp/ca_cert.pem
+
 ## cache
 #CACHE_URL=hiredis://redis:6379/2
 
