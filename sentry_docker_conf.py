@@ -20,7 +20,7 @@ DATABASES = {
 }
 
 if 'mysql' in DATABASES['default']['ENGINE'] and config('MYSQL_SSL_CERT_FILE', default=None):
-    DATABASES['default'].setdefault('OPTIONS', default=dict())['ssl'] =  {
+    DATABASES['default'].setdefault('OPTIONS', dict())['ssl'] =  {
         'key': '/map/to/ca-cert.pem'
     }
 
