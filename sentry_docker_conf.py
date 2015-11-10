@@ -20,9 +20,14 @@ DATABASES = {
 }
 
 if 'mysql' in DATABASES['default']['ENGINE'] and config('MYSQL_SSL_CERT_FILE', default=None):
-    DATABASES['default'].setdefault('OPTIONS', dict())['ssl'] =  {
+    DATABASES['default'].setdefault('OPTIONS', dict())['ssl'] = {
         'ca': config('MYSQL_SSL_CERT_FILE'),
     }
+
+if 'mysql' in DATABASES['default']['ENGINE'] and config('MYSQL_DEFAULTS_FILE', default=None):
+    DATABASES['default'].setdefault('OPTIONS', dict())['read_default_file'] = (
+        config('MYSQL_DEFAULTS_FILE')
+    )
 
 if 'postgres' in DATABASES['default']['ENGINE']:
     DATABASES['default']['OPTIONS'] = {
@@ -194,6 +199,7 @@ if SENTRY_USE_LDAP:
     from django_auth_ldap.config import LDAPSearch, GroupOfUniqueNamesType, PosixGroupType, NestedGroupOfNamesType
 
     AUTH_LDAP_SERVER_URI = config('LDAP_SERVER', default='ldap://localhost')
+    AUTH_LDAP_START_TLS = False
 
     AUTH_LDAP_BIND_DN = config('LDAP_BIND_DN', default='')
     AUTH_LDAP_BIND_PASSWORD = config('LDAP_BIND_PASSWORD', default='')
